@@ -1,11 +1,23 @@
 const modals = () => {
     function bindModal(triggerSelector, modalSelector, closeSelector) {
-        const trigger = document.querySelectorAll(triggerSelector)
+
+        const triggers = document.querySelectorAll(triggerSelector)
         const modal = document.querySelector(modalSelector)
         const close = document.querySelector(closeSelector)
 
-        trigger.forEach(item => {
-            item.addEventListener('click', (e) => {
+        function closeModal() {
+            modal.style.display = 'none'
+            document.body.classList.remove('modal-open')
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Escape') {
+                closeModal()
+            }
+        })
+
+        triggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
                 if (e.target) {
                     e.preventDefault()
                 }
@@ -16,28 +28,27 @@ const modals = () => {
         })
 
         close.addEventListener('click', () => {
-            modal.style.display = 'none'
-            document.body.classList.remove('modal-open')
+            closeModal()
         })
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.style.display = 'none'
-                document.body.classList.remove('modal-open')
+                closeModal()
             }
         })
     }
 
     function showModalByTime(selector, time) {
-        setTimeout(function () {
+        setTimeout(() => {
             document.querySelector(selector).style.display = 'block'
-            document.body.style.overflow = 'hidden'
+            document.body.classList.add('modal-open')
         }, time)
     }
 
     bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close')
     bindModal('.phone_link', '.popup', '.popup .popup_close')
-    showModalByTime('.popup', 60000)
+    showModalByTime('.popup', 5000)
+
 }
 
 export default modals
