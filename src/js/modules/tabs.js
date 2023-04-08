@@ -1,41 +1,49 @@
-const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = (headerSelector, tabSelector, contentSelector) => {
 
-    const header = document.querySelector(headerSelector)
-    const tab = document.querySelectorAll(tabSelector)
-    const content = document.querySelectorAll(contentSelector)
+    const header = document.querySelector(headerSelector);
+    const tabs = document.querySelectorAll(tabSelector);
+    const content = document.querySelectorAll(contentSelector);
 
-    function hideTabContent() {
-        content.forEach(item => {
-            item.style.display = 'none'
-        })
+    const hideTabContent = () => {
+        content.forEach(tab => {
+            tab.style.display = 'none';
+        });
 
-        tab.forEach(item => {
-            item.classList.remove(activeClass)
-        })
-    }
+        tabs.forEach(tab => {
+            tab.classList.remove('after_click');
+        });
+    };
 
-    function showTabContent(i = 0) {
-        content[i].style.display = 'block'
-        tab[i].classList.add(activeClass)
-    }
+    const showTabContent = (i = 0) => {
+        content[i].style.display = 'block';
+        tabs[i].classList.add('active');
+    };
 
-    hideTabContent()
-    showTabContent()
+    hideTabContent();
+    showTabContent();
 
-    header.addEventListener('click', (e) => {
-        const target = e.target
+    const toggleTabs = (e) => {
+        const target = e.target;
 
         if (target &&
             (target.classList.contains(tabSelector.replace(/\./, '')) ||
                 target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
-            tab.forEach((item, i) => {
+            tabs.forEach((item, i) => {
                 if (target == item || target.parentNode == item) {
-                    hideTabContent()
-                    showTabContent(i)
+                    hideTabContent();
+                    showTabContent(i);
                 }
-            })
+            });
         }
-    })
-}
+    };
 
-export default tabs
+    header.addEventListener('click', toggleTabs);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Enter') {
+            toggleTabs(e);
+        }
+    });
+};
+
+export default tabs;
