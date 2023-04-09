@@ -15,7 +15,7 @@ const tabs = (headerSelector, tabSelector, contentSelector) => {
     };
 
     const showTabContent = (i = 0) => {
-        content[i].style.display = 'block';
+        content[i].style.display = 'block'
         tabs[i].classList.add('active');
     };
 
