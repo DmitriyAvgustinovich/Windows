@@ -1,7 +1,11 @@
-const forms = () => {
+import checkNumInputs from "./checkNumInputs"
+
+const forms = (state) => {
 
     const form = document.querySelectorAll('form')
     const inputs = document.querySelectorAll('input')
+
+    checkNumInputs('input[name="user_phone"]')
 
     const message = {
         loading: 'Загрузка...',
@@ -39,9 +43,15 @@ const forms = () => {
 
             const formData = new FormData(item)
             const json = {}
-            formData.forEach((value, key) => json[key] = value)
 
-            postData('https://simple-server-cumz.onrender.com/api/data', json)
+            if (item.getAttribute('data-calc') === "end") {
+                for (let key in state) {
+                    formData.append(key, state[key])
+                    formData.forEach((value, key) => json[key] = value)
+                }
+            }
+
+            postData('https://windows-el7h.onrender.com/api/data', json)
                 .then(res => {
                     console.log(res)
                     statusMessage.textContent = message.success
@@ -60,4 +70,4 @@ const forms = () => {
 
 }
 
-export default forms
+export { forms }

@@ -2,12 +2,15 @@ import './slider'
 import modals from './modules/modals';
 import tabs from './modules/tabs';
 import forms from './modules/forms';
-import images from './modules/images';
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    let modalState = {}
+    let deadline = '2023-04-22'
+
+    changeModalState(modalState)
     modals()
     tabs('.glazing_slider', '.glazing_block', '.glazing_content', 'active')
     tabs('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click')
     forms()
-    images()
 })
