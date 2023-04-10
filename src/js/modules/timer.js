@@ -1,26 +1,17 @@
 const timer = (id, deadline) => {
+
     const addZero = (num) => {
-        if (num <= 9) {
-            return '0' + num;
-        } else {
-            return num;
-        }
+        return num <= 9 ? '0' + num : num
     };
 
     const getTimeRemaining = (endtime) => {
-        const t = Date.parse(endtime) - Date.parse(new Date()),
-            seconds = Math.floor((t / 1000) % 60),
-            minutes = Math.floor((t / 1000 / 60) % 60),
-            hours = Math.floor((t / (1000 * 60 * 60)) % 24),
-            days = Math.floor((t / (1000 * 60 * 60 * 24)));
+        const total = Date.parse(endtime) - Date.parse(new Date()),
+            seconds = Math.floor((total / 1000) % 60),
+            minutes = Math.floor((total / 1000 / 60) % 60),
+            hours = Math.floor((total / (1000 * 60 * 60)) % 24),
+            days = Math.floor((total / (1000 * 60 * 60 * 24)));
 
-        return {
-            'total': t,
-            'days': days,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds
-        };
+        return { total, days, hours, minutes, seconds };
     };
 
     const setClock = (selector, endtime) => {
@@ -28,18 +19,17 @@ const timer = (id, deadline) => {
             days = timer.querySelector("#days"),
             hours = timer.querySelector("#hours"),
             minutes = timer.querySelector("#minutes"),
-            seconds = timer.querySelector("#seconds"),
-            timeInterval = setInterval(updateClock, 1000);
+            seconds = timer.querySelector("#seconds")
 
-        updateClock();
-
-        function updateClock() {
+        const updateClock = () => {
             const t = getTimeRemaining(endtime);
 
             days.textContent = addZero(t.days);
             hours.textContent = addZero(t.hours);
             minutes.textContent = addZero(t.minutes);
             seconds.textContent = addZero(t.seconds);
+
+            const timeInterval = setInterval(updateClock, 1000);
 
             if (t.total <= 0) {
                 days.textContent = "00";
@@ -50,9 +40,11 @@ const timer = (id, deadline) => {
                 clearInterval(timeInterval);
             }
         }
+
+        updateClock();
     };
 
     setClock(id, deadline);
 };
 
-export default timer;
+export { timer }

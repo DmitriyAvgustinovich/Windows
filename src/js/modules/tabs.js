@@ -46,4 +46,4 @@ const tabs = (headerSelector, tabSelector, contentSelector) => {
     });
 };
 
-export default tabs;
+export { tabs }

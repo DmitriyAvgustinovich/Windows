@@ -37,4 +37,4 @@ const changeModalState = (state) => {
     bindActionToElems('change', windowProfile, 'profile')
 }
 
-export default changeModalState
+export { changeModalState }

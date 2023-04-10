@@ -70,4 +70,4 @@ const forms = (state) => {
 
 }
 
-export default forms
+export { forms }
