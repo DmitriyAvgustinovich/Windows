@@ -51,7 +51,7 @@ const forms = (state) => {
                 }
             }
 
-            postData('https://simple-server-cumz.onrender.com/api/data', json)
+            postData('https://windows-el7h.onrender.com/api/data', json)
                 .then(res => {
                     console.log(res)
                     statusMessage.textContent = message.success
