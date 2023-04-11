@@ -1,5 +1,5 @@
 import './slider'
-import { modals, tabs, forms, changeModalState, timer } from './modules'
+import { modals, tabs, forms, changeModalState, timer, images } from './modules'
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -14,4 +14,5 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block')
     forms(modalState)
     timer('.container1', deadline)
+    images()
 })

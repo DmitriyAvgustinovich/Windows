@@ -829,6 +829,13 @@ textarea:focus {
 }
 
 /*Modals*/
+.popup-images--open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-images,
 .popup,
 .popup_engineer,
 .popup_calc_end {
@@ -1033,7 +1040,7 @@ input:focus {
   opacity: 0;
 }
 
-.popup_calc_profile_content .checkbox:focus + .checkbox-custom {
+.popup_calc_profile_content .checkbox:focus+.checkbox-custom {
   box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #3a97f9;
 }
 
